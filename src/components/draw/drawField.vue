@@ -1,5 +1,6 @@
 <template>
-  <div class="draw-field">
+  <section class="draw-field">
+    <tools @handle-tools="handleTools" />
     <canvas
       id="myCanvas"
       ref="field"
@@ -9,14 +10,17 @@
     >
       Браузер не поддерживает рисовалку
     </canvas>
-  </div>
+  </section>
 </template>
 
 <script>
+import tools from '@/components/draw/components/tools'
 
 export default {
   name: 'draw-field',
-  components: {},
+  components: {
+    tools
+  },
   data () {
     return {
       canvas: null,
@@ -36,6 +40,10 @@ export default {
     this.onResize()
   },
   methods: {
+    handleTools (e) {
+      console.debug('handle-tools')
+      e()
+    },
     setPosition(e) {
       this.pos.x = e.offsetX >= 0 ? e.offsetX : 0
       this.pos.y = e.offsetY >= 0 ? e.offsetY : 0
@@ -58,23 +66,28 @@ export default {
       this.context.stroke()
     },
     onResize () {
-      const { innerWidth: width, innerHeight: height } = window
-      this.context.canvas.width = width / 2
+      const { clientWidth: width, clientHeight: height } = this.$el
+      this.context.canvas.width = width
       this.context.canvas.height = height / 2
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .draw-field {
   position: relative;
   height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
   & canvas {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     border: 1px solid #ccc;
+  }
+  & .tools {
+    position: absolute;
+    top: 30px;
+    right: 0;
   }
 }
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div class="draw">
-    <drawField />
+    <div class="container">
+      <drawField />
+    </div>
   </div>
 </template>
 
@@ -24,7 +26,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   .draw {
     height: 100%;
   }
