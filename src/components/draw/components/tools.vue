@@ -60,6 +60,13 @@ export default {
           arg: 'erase',
           isOn: false,
           fill: [false, true]
+        },
+        {
+          name: 'Лучи Вкл/Выкл',
+          funcName: 'modeSetter',
+          arg: 'rays',
+          isOn: false,
+          fill: [false, true]
         }
       ]
     }
