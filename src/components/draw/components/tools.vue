@@ -41,11 +41,11 @@ export default {
         {
           name: 'Сменить цвет',
           funcName: 'changeColor',
-          currentColor: { color: 'black', name: 'Чёрный' },
+          currentColor: { color: 'blue', name: 'Синий' },
           fill: [
             { color: 'green', name: 'Зеленый' },
             { color: 'red', name: 'Красный' },
-            { color: 'black', name: 'Чёрный' }
+            { color: 'blue', name: 'Синий' }
           ]
         },
         {
