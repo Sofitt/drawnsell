@@ -34,7 +34,7 @@ export default {
   watch: {
     lineCfg: {
       handler (cfg) {
-        this.line = Object.assign(this.line, cfg.value)
+        Object.assign(this.line, cfg.value)
       },
       deep: true
     }
@@ -65,6 +65,8 @@ export default {
         this.context.arc(this.pos.x,this.pos.y,8,0,Math.PI*2,false)
         this.context.fill()
         this.setPosition(evt)
+
+        return
       } else if (this.line.mode === 'rays') {
         this.context.globalCompositeOperation='source-over'
         this.context.moveTo(this.pos.x, this.pos.y)
