@@ -68,14 +68,11 @@ export default {
       } else if (this.line.mode === 'rays') {
         this.context.globalCompositeOperation='source-over'
         this.context.moveTo(this.pos.x, this.pos.y)
-        // this.setPosition(evt)
         this.context.lineTo(evt.clientX-this.canvas.offsetLeft, evt.clientY-this.canvas.offsetTop)
-        // this.context.lineTo(this.pos.x, this.pos.y)
       } else {
         this.context.globalCompositeOperation='source-over'
         this.context.moveTo(this.pos.x, this.pos.y)
         this.setPosition(evt)
-        // this.context.lineTo(evt.clientX-this.canvas.offsetLeft, evt.clientY-this.canvas.offsetTop)
         this.context.lineTo(this.pos.x, this.pos.y)
       }
     },
