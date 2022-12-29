@@ -1,36 +1,42 @@
 <template>
-  <section class="draw-field">
-    <tools @handle-tools="handleTools" />
-    <canvas
-      id="myCanvas"
-      ref="field"
-      @mousedown="setPosition"
-      @mouseenter="setPosition"
-      @mousemove="draw"
-    >
-      Браузер не поддерживает рисовалку
-    </canvas>
-  </section>
+  <canvas
+    id="myCanvas"
+    ref="field"
+    @mousedown="setPosition"
+    @mouseenter="setPosition"
+    @mousemove="draw"
+  >
+    Браузер не поддерживает рисовалку
+  </canvas>
 </template>
 
 <script>
-import tools from '@/components/draw/components/tools'
 
 export default {
-  name: 'draw-field',
+  name: 'field',
   components: {
-    tools
   },
+  inject: ['lineCfg'],
   data () {
     return {
       canvas: null,
+      canvasOffset: null,
       context: null,
       pos: { x: 0, y: 0 },
       line: {
         cap: 'round',
         width: 5,
-        color: 'red'
+        color: 'red',
+        mode: ''
       }
+    }
+  },
+  watch: {
+    lineCfg: {
+      handler (cfg) {
+        this.line = Object.assign(this.line, cfg.value)
+      },
+      deep: true
     }
   },
   mounted () {
@@ -54,9 +60,18 @@ export default {
       this.context.strokeStyle = this.line.color
     },
     setLinePath (evt) {
-      this.context.moveTo(this.pos.x, this.pos.y)
-      this.setPosition(evt)
-      this.context.lineTo(this.pos.x, this.pos.y)
+      if (this.line.mode === 'erase') {
+        this.context.globalCompositeOperation='destination-out'
+        this.context.arc(this.pos.x,this.pos.y,8,0,Math.PI*2,false)
+        this.context.fill()
+        this.setPosition(evt)
+      } else {
+        this.context.globalCompositeOperation='source-over'
+        this.context.moveTo(this.pos.x, this.pos.y)
+        this.setPosition(evt)
+        // this.context.lineTo(evt.clientX-this.canvas.offsetLeft, evt.clientY-this.canvas.offsetTop)
+        this.context.lineTo(this.pos.x, this.pos.y)
+      }
     },
     draw(evt) {
       if (evt.buttons !== 1) return
@@ -66,7 +81,7 @@ export default {
       this.context.stroke()
     },
     onResize () {
-      const { clientWidth: width, clientHeight: height } = this.$el
+      const { clientWidth: width, clientHeight: height } = this.$el.parentNode
       this.context.canvas.width = width
       this.context.canvas.height = height / 2
     }
@@ -75,19 +90,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.draw-field {
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  & canvas {
-    border: 1px solid #ccc;
-  }
-  & .tools {
-    position: absolute;
-    top: 30px;
-    right: 0;
-  }
+canvas {
+  border: 1px solid #ccc;
 }
 </style>

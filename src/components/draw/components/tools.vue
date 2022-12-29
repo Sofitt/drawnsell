@@ -12,12 +12,15 @@
         v-if="tool.menu"
         class="dropdown"
       >
+        <!--        v-for="menuItem of tool.menu" -->
         <li
-          v-for="menuItem of tool.menu"
+          v-for="menuItem of menu"
           :key="menuItem"
+          :style="{backgroundColor: menuItem?.fill}"
+          :title="menuItem.name"
           @click="handleClick(menuItem)"
         >
-          <span>{{ menuItem.name }}</span>
+          <span v-if="!menuItem.fill">{{ menuItem.name }}</span>
         </li>
       </ul>
     </div>
@@ -29,26 +32,85 @@ import toolsActions from '@/components/draw/components/toolsActions'
 
 export default {
   name: 'tools',
-  emits: ['handle-tools'],
+  emits: ['handle-tools', 'change-pen-color', 'change-pen-size', 'change-pen-mode'],
   components: {},
   data () {
     return {
-      tools: toolsActions
+      tools: null,
+      menu: [
+        {
+          name: 'Сменить цвет',
+          funcName: 'changeColor',
+          currentColor: { color: 'black', name: 'Чёрный' },
+          fill: [
+            { color: 'green', name: 'Зеленый' },
+            { color: 'red', name: 'Красный' },
+            { color: 'black', name: 'Чёрный' }
+          ]
+        },
+        {
+          name: 'Сменить размер',
+          funcName: 'changeSize',
+          currentSize: 5,
+          fill: [5, 10, 15]
+        },
+        {
+          name: 'Резинка Вкл/Выкл',
+          funcName: 'modeSetter',
+          arg: 'erase',
+          isOn: false,
+          fill: [false, true]
+        }
+      ]
     }
   },
-  computed: {},
-  watch: {},
   mounted () {
-
+    console.debug(toolsActions)
+    this.tools = [toolsActions.getTools]
   },
   methods: {
-    handleClick (args) {
-      const {func, type, arg} = args
-      if (type === 'emit') {
-        this.$emit('handle-tools', func.bind(null, arg))
-      } else {
-        func(arg)
-      }
+    getActionFromMenu (actionName) {
+      return this.menu.findIndex(i => i.name === actionName)
+    },
+    cyclone (action, searchMethod, searchArg, currentStaff) {
+      const indexOfCurrentStaff = action.fill[searchMethod](searchArg)
+      action[currentStaff] = indexOfCurrentStaff === (action.fill.length - 1)
+        ? action.fill[0]
+        : action.fill[indexOfCurrentStaff + 1]
+
+      return action[currentStaff]
+    },
+    modeSetter (actionName) {
+      let action = this.menu[this.getActionFromMenu(actionName)]
+      const emit = this.cyclone(
+        action,
+        'indexOf',
+        action.isOn,
+        'isOn')
+      this.$emit('change-pen-mode', { isOn: emit, mode: action.arg })
+    },
+    changeColor (actionName) {
+      let action = this.menu[this.getActionFromMenu(actionName)]
+      const emit = this.cyclone(
+        action,
+        'findIndex',
+        c => c.color === action.currentColor.color,
+        'currentColor')
+      this.$emit('change-pen-color', emit)
+    },
+    changeSize (actionName) {
+      let action = this.menu.find(i => i.name === actionName)
+      const emit = this.cyclone(action, 'indexOf', action.currentSize, 'currentSize')
+      this.$emit('change-pen-size', emit)
+    },
+    handleClick (action) {
+      this[action.funcName](action.name)
+      // const {func, type, arg} = args
+      // if (type === 'emit') {
+      //   this.$emit('handle-tools', arg ? func.bind(null, arg) : func)
+      // } else {
+      //   func(arg)
+      // }
     }
   }
 }
@@ -96,6 +158,7 @@ export default {
     align-items: center;
     justify-content: center;
     height: 30px;
+    border: 1px solid red;
     & span {
       text-align: left;
     }

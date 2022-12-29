@@ -1,18 +1,16 @@
 <template>
-  <div class="draw">
-    <div class="container">
-      <drawField />
-    </div>
+  <div class="draw-page">
+    <container />
   </div>
 </template>
 
 <script>
-import drawField from '@/components/draw/drawField'
+import container from '@/components/draw/container'
 
 export default {
   name: 'draw-page',
   components: {
-    drawField
+    container
   },
   data () {
     return {}
@@ -27,7 +25,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .draw {
+  .draw-page {
     height: 100%;
   }
 </style>

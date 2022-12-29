@@ -62,6 +62,7 @@ module.exports = {
     'array-callback-return': ['error', { allowImplicit: true }], // return в callback методов массива
     'no-unmodified-loop-condition': 'error',
     // Vue
+    'vue/require-default-prop': 'off',
     'vue/multi-word-component-names': 'off',
     'vue/no-multi-spaces': 'error',
     'vue/no-mutating-props': 'error',
