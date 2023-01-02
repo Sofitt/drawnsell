@@ -45,8 +45,6 @@ export default {
       changePenSize,
       handleTools
     }
-  },
-  mounted () {
   }
 }
 </script>
@@ -58,7 +56,7 @@ export default {
   & .tools {
     position: absolute;
     top: 30px;
-    right: 0;
+    right: 3px;
   }
 }
 </style>

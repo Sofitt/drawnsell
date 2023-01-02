@@ -1,34 +1,23 @@
 <template>
-  <article class="tools">
-    <div
-      v-for="tool of tools"
-      :key="tool.name"
-      class="tool"
-      :title="tool.name"
-      @click.self="handleClick(tool)"
+  <ul class="tools">
+    <li
+      v-for="menuItem of menu"
+      :key="menuItem"
+      @click="handleClick(menuItem)"
     >
-      {{ tool.icon }}
-      <ul
-        v-if="tool.menu"
-        class="dropdown"
+      <img
+        v-if="menuItem.icon"
+        :src="require(`@/assets/icons/${menuItem.icon}`)"
+        :alt="menuItem.name"
       >
-        <!--        v-for="menuItem of tool.menu" -->
-        <li
-          v-for="menuItem of menu"
-          :key="menuItem"
-          :style="{backgroundColor: menuItem?.fill}"
-          :title="menuItem.name"
-          @click="handleClick(menuItem)"
-        >
-          <span v-if="!menuItem.fill">{{ menuItem.name }}</span>
-        </li>
-      </ul>
-    </div>
-  </article>
+      <span v-else>*</span>
+      <span v-if="!menuItem.fill">{{ menuItem.name }}</span>
+    </li>
+  </ul>
 </template>
 
 <script>
-import toolsActions from '@/components/draw/components/toolsActions'
+import { menu } from '@/components/draw/components/toolsActions'
 
 export default {
   name: 'tools',
@@ -36,44 +25,13 @@ export default {
   components: {},
   data () {
     return {
-      tools: null,
-      menu: [
-        {
-          name: 'Сменить цвет',
-          funcName: 'changeColor',
-          currentColor: { color: 'blue', name: 'Синий' },
-          fill: [
-            { color: 'green', name: 'Зеленый' },
-            { color: 'red', name: 'Красный' },
-            { color: 'blue', name: 'Синий' }
-          ]
-        },
-        {
-          name: 'Сменить размер',
-          funcName: 'changeSize',
-          currentSize: 5,
-          fill: [5, 10, 15]
-        },
-        {
-          name: 'Резинка Вкл/Выкл',
-          funcName: 'modeSetter',
-          arg: 'erase',
-          isOn: false,
-          fill: [false, true]
-        },
-        {
-          name: 'Лучи Вкл/Выкл',
-          funcName: 'modeSetter',
-          arg: 'rays',
-          isOn: false,
-          fill: [false, true]
-        }
-      ]
+      tools: [],
+      menu: []
     }
   },
   mounted () {
-    console.debug(toolsActions)
-    this.tools = [toolsActions.getTools]
+    this.menu = menu
+    this.modeSetter('Карандаш')
   },
   methods: {
     getActionFromMenu (actionName) {
@@ -112,12 +70,13 @@ export default {
     },
     handleClick (action) {
       this[action.funcName](action.name)
-      // const {func, type, arg} = args
-      // if (type === 'emit') {
-      //   this.$emit('handle-tools', arg ? func.bind(null, arg) : func)
-      // } else {
-      //   func(arg)
-      // }
+      if (action.funcName === 'modeSetter') {
+        this.menu.forEach(item => {
+          if (item.name !== action.name && Object.hasOwn(item, 'isOn')) {
+            item.isOn = false
+          }
+        })
+      }
     }
   }
 }
@@ -125,50 +84,31 @@ export default {
 
 <style scoped lang="scss">
  .tools {
+   pointer-events: none;
    display: flex;
    flex-flow: row wrap;
    width: 100%;
    max-width: 30%;
-   pointer-events: none;
- }
- .tool {
-   pointer-events: auto;
-   cursor: pointer;
-   user-select: none;
-   position: relative;
-   display: flex;
-   flex-flow: column;
-   align-items: center;
-   justify-content: center;
-   width: 30px;
-   height: 30px;
-   background: #e4e4e4;
-   border: 1px solid transparent;
-   &:hover {
-     border: 1px solid gray;
-     & .dropdown {
-       display: flex;
-       flex-flow: column;
+   gap: 10px;
+   & li {
+     pointer-events: auto;
+     position: relative;
+     display: flex;
+     flex-flow: column;
+     align-items: center;
+     justify-content: center;
+     height: 30px;
+     width: 30px;
+     background: white;
+     border: 1px solid red;
+     & img {
+       position: absolute;
+       width: 80%;
+       object-fit: contain;
+     }
+     & span {
+       text-align: left;
      }
    }
  }
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  width: 30px;
-  padding: 10px;
-  gap: 10px;
-  & li {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    border: 1px solid red;
-    & span {
-      text-align: left;
-    }
-  }
-}
 </style>

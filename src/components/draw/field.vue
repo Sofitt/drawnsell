@@ -1,6 +1,5 @@
 <template>
   <canvas
-    id="myCanvas"
     ref="field"
     @mousedown="setPosition"
     @mouseenter="setPosition"
@@ -41,15 +40,11 @@ export default {
   },
   mounted () {
     window.addEventListener('resize', this.onResize)
-    this.canvas = this.$refs.field
+    this.canvas = this.$el
     this.context = this.canvas.getContext('2d')
     this.onResize()
   },
   methods: {
-    handleTools (e) {
-      console.debug('handle-tools')
-      e()
-    },
     setPosition(e) {
       this.pos.x = e.offsetX >= 0 ? e.offsetX : 0
       this.pos.y = e.offsetY >= 0 ? e.offsetY : 0
@@ -60,19 +55,16 @@ export default {
       this.context.strokeStyle = this.line.color
     },
     setLinePath (evt) {
+      this.context.globalCompositeOperation='source-over'
       if (this.line.mode === 'erase') {
         this.context.globalCompositeOperation='destination-out'
         this.context.arc(this.pos.x,this.pos.y,8,0,Math.PI*2,false)
         this.context.fill()
         this.setPosition(evt)
-
-        return
       } else if (this.line.mode === 'rays') {
-        this.context.globalCompositeOperation='source-over'
         this.context.moveTo(this.pos.x, this.pos.y)
-        this.context.lineTo(evt.clientX-this.canvas.offsetLeft, evt.clientY-this.canvas.offsetTop)
-      } else {
-        this.context.globalCompositeOperation='source-over'
+        this.context.lineTo(evt.offsetX, evt.clientY)
+      } else { // if (this.line.mode === 'pen')
         this.context.moveTo(this.pos.x, this.pos.y)
         this.setPosition(evt)
         this.context.lineTo(this.pos.x, this.pos.y)
@@ -87,7 +79,7 @@ export default {
     },
     onResize () {
       const { clientWidth: width, clientHeight: height } = this.$el.parentNode
-      this.context.canvas.width = width
+      this.context.canvas.width = width - 5
       this.context.canvas.height = height / 2
     }
   }
