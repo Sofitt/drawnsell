@@ -19,7 +19,6 @@ export default {
   data () {
     return {
       canvas: null,
-      canvasOffset: null,
       context: null,
       pos: { x: 0, y: 0 },
       line: {
@@ -27,7 +26,8 @@ export default {
         width: 5,
         color: 'red',
         mode: ''
-      }
+      },
+      imgData: null
     }
   },
   watch: {
@@ -72,15 +72,37 @@ export default {
     },
     draw(evt) {
       if (evt.buttons !== 1) return
+      if (this.imgData) {
+        this.imgData = false
+      }
       this.context.beginPath()
       this.setLineStyle()
       this.setLinePath(evt)
       this.context.stroke()
     },
+    saveImgData () {
+      console.debug(this.context.canvas.width+5)
+      console.debug(this.$el?.parentNode.clientHeight)
+      console.debug(this.$el)
+      if (!this.imgData || this.$el?.parentNode.clientHeight !== this.context.canvas.width) {
+        this.imgData = this.context.getImageData(
+          0,
+          0,
+          this.context.canvas.width,
+          this.context.canvas.height
+        )
+      }
+    },
+    putImgData () {
+      this.imgData && this.context.putImageData(this.imgData, 0, 0)
+    },
     onResize () {
+      this.saveImgData()
       const { clientWidth: width, clientHeight: height } = this.$el.parentNode
       this.context.canvas.width = width - 5
       this.context.canvas.height = height / 2
+      this.putImgData()
+      console.debug(this.context)
     }
   }
 }
