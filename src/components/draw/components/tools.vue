@@ -10,8 +10,6 @@
         :src="require(`@/assets/icons/${menuItem.icon}`)"
         :alt="menuItem.name"
       >
-      <span v-else>*</span>
-      <span v-if="!menuItem.fill">{{ menuItem.name }}</span>
     </li>
   </ul>
 </template>

@@ -1,5 +1,6 @@
 export const menu = [
   {
+    icon: 'download.svg',
     name: 'Скачать изображение',
     funcName: 'downloadImg'
   },
