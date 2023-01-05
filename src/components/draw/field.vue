@@ -14,6 +14,7 @@
 
 export default {
   name: 'field',
+  emits: ['interface'],
   components: {
   },
   inject: ['lineCfg'],
@@ -44,6 +45,7 @@ export default {
     }
   },
   mounted () {
+    this.emitInterface()
     window.addEventListener('resize', this.rerenderImg)
     this.canvas = this.$el
     this.context = this.canvas.getContext('2d')
@@ -101,6 +103,18 @@ export default {
     rerenderImg () {
       this.setCanvasSize()
       this.putImgData()
+    },
+    downloadImg () {
+      let a = document.createElement('a')
+      a.href = this.canvas.toDataURL('image/png', 1.0)
+      a.download = 'aboba'
+      document.body.appendChild(a)
+      a.click()
+    },
+    emitInterface () {
+      this.$emit('interface', {
+        downloadImg: () => this.downloadImg()
+      })
     }
   }
 }

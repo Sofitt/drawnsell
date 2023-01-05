@@ -1,5 +1,9 @@
 export const menu = [
   {
+    name: 'Скачать изображение',
+    funcName: 'downloadImg'
+  },
+  {
     icon: 'color.svg',
     name: 'Сменить цвет',
     funcName: 'changeColor',

@@ -5,8 +5,9 @@
       @change-pen-color="changePenColor"
       @change-pen-size="changePenSize"
       @change-pen-mode="changePenMode"
+      @download-img="downloadImg"
     />
-    <field />
+    <field @interface="getChildInterface" />
   </div>
 </template>
 
@@ -44,6 +45,14 @@ export default {
       changePenColor,
       changePenSize,
       handleTools
+    }
+  },
+  methods: {
+    getChildInterface (childInterface) {
+      this.$options.childInterface = childInterface
+    },
+    downloadImg () {
+      this.$options.childInterface.downloadImg()
     }
   }
 }

@@ -21,7 +21,7 @@ import { menu } from '@/components/draw/components/toolsActions'
 
 export default {
   name: 'tools',
-  emits: ['handle-tools', 'change-pen-color', 'change-pen-size', 'change-pen-mode'],
+  emits: ['handle-tools', 'change-pen-color', 'change-pen-size', 'change-pen-mode', 'download-img'],
   components: {},
   data () {
     return {
@@ -44,6 +44,9 @@ export default {
         : action.fill[indexOfCurrentStaff + 1]
 
       return action[currentStaff]
+    },
+    downloadImg () {
+      this.$emit('download-img')
     },
     modeSetter (actionName) {
       let action = this.menu[this.getActionFromMenu(actionName)]
