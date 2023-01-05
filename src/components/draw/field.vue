@@ -1,5 +1,6 @@
 <template>
   <canvas
+    id="draw-field"
     ref="field"
     @mousedown="setPosition"
     @mouseenter="setPosition"
@@ -13,21 +14,26 @@
 
 export default {
   name: 'field',
+  emits: ['interface'],
   components: {
   },
   inject: ['lineCfg'],
   data () {
     return {
+      // canvas
       canvas: null,
       context: null,
+      // offscreenCanvas
+      offScreenCanvas: null,
+      subContext: null,
+      // Draw settings
       pos: { x: 0, y: 0 },
       line: {
         cap: 'round',
         width: 5,
         color: 'red',
         mode: ''
-      },
-      imgData: null
+      }
     }
   },
   watch: {
@@ -39,70 +45,76 @@ export default {
     }
   },
   mounted () {
-    window.addEventListener('resize', this.onResize)
+    this.emitInterface()
+    window.addEventListener('resize', this.rerenderImg)
     this.canvas = this.$el
     this.context = this.canvas.getContext('2d')
-    this.onResize()
+    this.createOffsetScreenCanvas()
+    this.rerenderImg()
   },
   methods: {
+    createOffsetScreenCanvas () {
+      this.offScreenCanvas = document.createElement('canvas')
+      this.offScreenCanvas.width = 1920
+      this.offScreenCanvas.height = 1080
+      this.subContext = this.offScreenCanvas.getContext('2d')
+    },
     setPosition(e) {
       this.pos.x = e.offsetX >= 0 ? e.offsetX : 0
       this.pos.y = e.offsetY >= 0 ? e.offsetY : 0
     },
     setLineStyle () {
-      this.context.lineWidth = this.line.width
-      this.context.lineCap = this.line.cap
-      this.context.strokeStyle = this.line.color
+      this.subContext.lineWidth = this.line.width
+      this.subContext.lineCap = this.line.cap
+      this.subContext.strokeStyle = this.line.color
     },
     setLinePath (evt) {
-      this.context.globalCompositeOperation='source-over'
+      this.subContext.globalCompositeOperation='source-over'
       if (this.line.mode === 'erase') {
-        this.context.globalCompositeOperation='destination-out'
-        this.context.arc(this.pos.x,this.pos.y,8,0,Math.PI*2,false)
-        this.context.fill()
+        this.subContext.globalCompositeOperation='destination-out'
+        this.subContext.arc(this.pos.x,this.pos.y,8,0,Math.PI*2,false)
+        this.subContext.fill()
         this.setPosition(evt)
       } else if (this.line.mode === 'rays') {
-        this.context.moveTo(this.pos.x, this.pos.y)
-        this.context.lineTo(evt.offsetX, evt.clientY)
+        this.subContext.moveTo(this.pos.x, this.pos.y)
+        this.subContext.lineTo(evt.offsetX, evt.clientY)
       } else { // if (this.line.mode === 'pen')
-        this.context.moveTo(this.pos.x, this.pos.y)
+        this.subContext.moveTo(this.pos.x, this.pos.y)
         this.setPosition(evt)
-        this.context.lineTo(this.pos.x, this.pos.y)
+        this.subContext.lineTo(this.pos.x, this.pos.y)
       }
     },
     draw(evt) {
       if (evt.buttons !== 1) return
-      if (this.imgData) {
-        this.imgData = false
-      }
-      this.context.beginPath()
+      this.subContext.beginPath()
       this.setLineStyle()
       this.setLinePath(evt)
-      this.context.stroke()
+      this.subContext.stroke()
+      this.rerenderImg()
     },
-    saveImgData () {
-      console.debug(this.context.canvas.width+5)
-      console.debug(this.$el?.parentNode.clientHeight)
-      console.debug(this.$el)
-      if (!this.imgData || this.$el?.parentNode.clientHeight !== this.context.canvas.width) {
-        this.imgData = this.context.getImageData(
-          0,
-          0,
-          this.context.canvas.width,
-          this.context.canvas.height
-        )
-      }
-    },
-    putImgData () {
-      this.imgData && this.context.putImageData(this.imgData, 0, 0)
-    },
-    onResize () {
-      this.saveImgData()
-      const { clientWidth: width, clientHeight: height } = this.$el.parentNode
+    setCanvasSize () {
+      const { clientWidth: width, clientHeight: height } = document.querySelector('#draw-field').parentNode
       this.context.canvas.width = width - 5
       this.context.canvas.height = height / 2
+    },
+    putImgData () {
+      this.context.drawImage(this.offScreenCanvas, 0, 0)
+    },
+    rerenderImg () {
+      this.setCanvasSize()
       this.putImgData()
-      console.debug(this.context)
+    },
+    downloadImg () {
+      let a = document.createElement('a')
+      a.href = this.canvas.toDataURL('image/png', 1.0)
+      a.download = 'aboba'
+      document.body.appendChild(a)
+      a.click()
+    },
+    emitInterface () {
+      this.$emit('interface', {
+        downloadImg: () => this.downloadImg()
+      })
     }
   }
 }
