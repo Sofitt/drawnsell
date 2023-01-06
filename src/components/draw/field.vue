@@ -15,6 +15,11 @@
 export default {
   name: 'field',
   emits: ['interface'],
+  props: {
+    fullscreen: {
+      type: Boolean
+    }
+  },
   components: {
   },
   inject: ['lineCfg'],
@@ -42,6 +47,9 @@ export default {
         Object.assign(this.line, cfg.value)
       },
       deep: true
+    },
+    fullscreen (is) {
+      !is && this.rerenderImg()
     }
   },
   mounted () {
@@ -55,8 +63,8 @@ export default {
   methods: {
     createOffsetScreenCanvas () {
       this.offScreenCanvas = document.createElement('canvas')
-      this.offScreenCanvas.width = 1920
-      this.offScreenCanvas.height = 1080
+      this.offScreenCanvas.width = 3000
+      this.offScreenCanvas.height = 3000
       this.subContext = this.offScreenCanvas.getContext('2d')
     },
     setPosition(e) {
@@ -95,7 +103,7 @@ export default {
     setCanvasSize () {
       const { clientWidth: width, clientHeight: height } = document.querySelector('#draw-field').parentNode
       this.context.canvas.width = width - 5
-      this.context.canvas.height = height / 2
+      this.context.canvas.height = this.fullscreen ? height - 15 : height / 2
     },
     putImgData () {
       this.context.drawImage(this.offScreenCanvas, 0, 0)

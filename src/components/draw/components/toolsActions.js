@@ -5,6 +5,11 @@ export const menu = [
     funcName: 'downloadImg'
   },
   {
+    icon: 'fullscreen.svg',
+    name: 'На полный экран',
+    funcName: 'fullscreen'
+  },
+  {
     icon: 'color.svg',
     name: 'Сменить цвет',
     funcName: 'changeColor',

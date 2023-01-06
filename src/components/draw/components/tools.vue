@@ -19,7 +19,14 @@ import { menu } from '@/components/draw/components/toolsActions'
 
 export default {
   name: 'tools',
-  emits: ['handle-tools', 'change-pen-color', 'change-pen-size', 'change-pen-mode', 'download-img'],
+  emits: [
+    'handle-tools',
+    'change-pen-color',
+    'change-pen-size',
+    'change-pen-mode',
+    'download-img',
+    'fullscreen'
+  ],
   components: {},
   data () {
     return {
@@ -45,6 +52,9 @@ export default {
     },
     downloadImg () {
       this.$emit('download-img')
+    },
+    fullscreen () {
+      this.$emit('fullscreen')
     },
     modeSetter (actionName) {
       let action = this.menu[this.getActionFromMenu(actionName)]

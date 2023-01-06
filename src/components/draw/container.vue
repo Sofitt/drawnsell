@@ -6,8 +6,12 @@
       @change-pen-size="changePenSize"
       @change-pen-mode="changePenMode"
       @download-img="downloadImg"
+      @fullscreen="fullscreen"
     />
-    <field @interface="getChildInterface" />
+    <field
+      :fullscreen="isFullscreen"
+      @interface="getChildInterface"
+    />
   </div>
 </template>
 
@@ -21,6 +25,7 @@ export default {
   components: {tools, field},
   setup () {
     let lineCfg = ref({})
+    let isFullscreen = ref(false)
     const changePenMode = (actionData) => {
       console.debug('c', actionData)
       lineCfg.value.mode = actionData.isOn && actionData.mode
@@ -41,11 +46,18 @@ export default {
 
     return {
       lineCfg,
+      isFullscreen,
       changePenMode,
       changePenColor,
       changePenSize,
       handleTools
     }
+  },
+  mounted () {
+    document.addEventListener('fullscreenchange', this.handleFullscreenChange)
+  },
+  beforeUnmount () {
+    document.removeEventListener('fullscreenchange', this.handleFullscreenChange)
   },
   methods: {
     getChildInterface (childInterface) {
@@ -53,6 +65,12 @@ export default {
     },
     downloadImg () {
       this.$options.childInterface.downloadImg()
+    },
+    fullscreen () {
+      this.isFullscreen ? document.exitFullscreen() : this.$el.requestFullscreen()
+    },
+    handleFullscreenChange () {
+      this.isFullscreen = !!document.fullscreenElement
     }
   }
 }
