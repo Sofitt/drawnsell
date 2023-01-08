@@ -34,6 +34,12 @@ body {
 ol, ul {
   list-style: none;
 }
+button {
+  border: 0;
+  &:active {
+    border: 0;
+  }
+}
 blockquote, q {
   quotes: none;
 }

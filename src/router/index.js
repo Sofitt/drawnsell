@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import drawPage from '../pages/drawPage.vue'
+import drawPage from '@/pages/drawPage.vue'
+import buyPage from '@/pages/buyPage'
 
 const routes = [
   {
-    path: '/',
+    path: '/draw',
     name: 'draw',
     component: drawPage
+  },
+  {
+    path: '/',
+    name: 'buy',
+    component: buyPage
   }
   // {
   //   path: '/about',
