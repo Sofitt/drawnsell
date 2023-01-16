@@ -1,5 +1,8 @@
 <template>
-  <div class="carousel">
+  <section class="carousel">
+    <h3 hidden>
+      Карусель товаров
+    </h3>
     <swiper
       ref="swiper"
       :slides-per-view="3"
@@ -7,12 +10,18 @@
       :direction="'vertical'"
       :modules="modules"
       :navigation="true"
+      :allow-touch-move="false"
     >
       <swiper-slide
-        v-for="i in 5"
-        :key="i"
+        v-for="card in content"
+        :key="card.img"
       >
-        <img :src="require(`@/assets/buy-carousel/bg1.png`)">
+        <buyCard
+          :class="{__disabled: card.isLast}"
+          draggable="true"
+          :card-data="card"
+          @dragstart="dragStart($event, card)"
+        />
       </swiper-slide>
     </swiper>
     <template v-if="swiper">
@@ -29,19 +38,28 @@
         @click="swipe(true)"
       />
     </template>
-  </div>
+  </section>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Scrollbar } from 'swiper'
+import buyCard from '@/components/buy/components/buy-card'
 import 'swiper/css'
 
 export default {
   name: 'carousel',
+  emits: ['drag-item'],
+  props: {
+    content: {
+      type: Array,
+      required: true
+    }
+  },
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    buyCard
   },
   setup () {
     return {
@@ -59,6 +77,9 @@ export default {
     this.swiper = this.$el.querySelector('.swiper').swiper
   },
   methods: {
+    dragStart (e, data) {
+      this.$emit('drag-item', {e, data})
+    },
     swipe (isNext) {
       isNext ? this.swiper.slideNext() : this.swiper.slidePrev()
     }
