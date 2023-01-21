@@ -11,7 +11,10 @@ import vFooter from './components/main/v-footer'
 import hamsterModal from '@/components/UI/hamster-modal'
 
 export default {
-  components: {vFooter, hamsterModal}
+  components: {vFooter, hamsterModal},
+  mounted() {
+    window.scroll(0, 0)
+  }
 }
 </script>
 

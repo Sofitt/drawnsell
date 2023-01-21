@@ -1,5 +1,8 @@
 <template>
-  <div class="hamster">
+  <div
+    class="hamster"
+    draggable="false"
+  >
     <img
       class="img"
       :src="require('@/assets/main/dancing-hamstergif.gif')"
@@ -20,8 +23,10 @@ export default {
 .hamster {
   position: relative;
   height: 100%;
+  user-select: none;
 }
 .img {
+  pointer-events: none;
   z-index: 2;
   position: absolute;
   bottom: 100px;

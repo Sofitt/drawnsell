@@ -75,8 +75,10 @@ export default {
     subtractItem (item) {
       if (item.count - 1 >= 1) {
         item.count--
-        let removeItem = document.querySelector(`[data-name='${item.name}']`)
-        removeItem.remove()
+        if (document.querySelectorAll(`[data-name='${item.name}']`).length > 1) {
+          let removeItem = document.querySelector(`[data-name='${item.name}']`)
+          removeItem.remove()
+        }
       }
     },
     removeItem (item) {
