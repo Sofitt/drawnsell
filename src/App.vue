@@ -22,6 +22,7 @@ export default {
 
 <style lang="scss">
 #app {
+  position: relative;
   scroll-behavior: smooth;
   color: #2c3e50;
 }

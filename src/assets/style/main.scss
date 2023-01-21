@@ -1,11 +1,11 @@
 @import './reset.scss';
 @import "color-shorts";
 @import "vars.scss";
+html {
+  background-color: #180617;
+}
 body {
   background-color: var(--purple-2);
-}
-.app {
-  height: 100vh;
 }
 .container {
   margin: 0 auto;

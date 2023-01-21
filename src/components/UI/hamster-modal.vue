@@ -29,11 +29,13 @@ export default {
     let closed = ref(false)
     const close = () => {
       document.body.style.overflow = 'auto'
+      document.body.style.transform = ''
       document.removeEventListener('scroll', cancelScroll)
       closed.value = true
     }
     const cancelScroll = () => {
       document.body.style.overflow = 'hidden'
+      document.body.style.transform = 'translateX(-8px)'
     }
     const scrollToFooter = () => {
       window.scrollTo({behavior: 'smooth', top: document.documentElement.scrollHeight - document.documentElement.clientHeight, left: 0})

@@ -84,6 +84,7 @@ export default {
 
 <style scoped lang="scss">
 .v-footer {
+  z-index: 1;
   position: relative;
   display: flex;
   flex-flow: column;
