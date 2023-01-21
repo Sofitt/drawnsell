@@ -1,17 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import drawPage from '@/pages/drawPage.vue'
-import buyPage from '@/pages/buyPage'
+import mainPage from '@/pages/mainPage.vue'
+// import drawPage from '@/pages/drawPage.vue'
+// import buyPage from '@/pages/buyPage.vue'
 
 const routes = [
   {
     path: '/draw',
     name: 'draw',
-    component: drawPage
+    component: () => import(/* webpackChunkName: "drawPage" */ '@/pages/drawPage.vue')
+  },
+  {
+    path: '/buy',
+    name: 'buy',
+    component: () => import(/* webpackChunkName: "buyPage" */ '@/pages/buyPage.vue')
   },
   {
     path: '/',
-    name: 'buy',
-    component: buyPage
+    name: 'main',
+    component: mainPage
   }
   // {
   //   path: '/about',
