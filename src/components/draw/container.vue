@@ -27,19 +27,15 @@ export default {
     let lineCfg = ref({})
     let isFullscreen = ref(false)
     const changePenMode = (actionData) => {
-      console.debug('c', actionData)
       lineCfg.value.mode = actionData.isOn && actionData.mode
     }
     const changePenColor = (actionData) => {
-      console.debug('c', actionData.color)
       lineCfg.value.color = actionData.color
     }
     const changePenSize = (actionData) => {
-      console.debug('s', actionData)
       lineCfg.value.width = actionData
     }
     const handleTools = (func) => {
-      console.debug('handle-tools')
       func()
     }
     provide('lineCfg', lineCfg)

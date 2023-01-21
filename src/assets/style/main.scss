@@ -1,6 +1,8 @@
 @import './reset.scss';
+@import "color-shorts";
+@import "vars.scss";
 body {
-  background-color: black;
+  background-color: var(--purple-2);
 }
 .app {
   height: 100vh;

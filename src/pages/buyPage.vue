@@ -25,5 +25,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.buy-page {
+  padding-bottom: 500px;
+}
 </style>
