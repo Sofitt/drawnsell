@@ -1,31 +1,33 @@
 <template>
-  <div class="v-header">
-    <nav class="left">
-      <component
-        :is="isMainPage.value ? 'span' : 'a'"
-        class="user"
-        @click="routeTo"
-      >
-        User#1111
-      </component>
-      <!-- Можно сделать меню пользователя с ссылками на свои работы -->
-    </nav>
-    <div class="right">
-      <nav class="pages">
-        <router-link
-          v-for="page of pages"
-          :key="page.name"
-          :to="`/` + page.name"
+  <div class="v-header container">
+    <div class="v-header_body">
+      <nav class="left">
+        <component
+          :is="isMainPage.value ? 'span' : 'a'"
+          class="user"
+          @click="routeTo"
         >
-          <img
-            :src="page.icon"
-            :alt="`Страница ` + page.name"
-          >
-        </router-link>
+          User#1111
+        </component>
+        <!-- Можно сделать меню пользователя с ссылками на свои работы -->
       </nav>
-      <button class="login">
-        LOGIN
-      </button>
+      <div class="right">
+        <nav class="pages">
+          <router-link
+            v-for="page of pages"
+            :key="page.name"
+            :to="`/` + page.name"
+          >
+            <img
+              :src="page.icon"
+              :alt="`Страница ` + page.name"
+            >
+          </router-link>
+        </nav>
+        <button class="login">
+          LOGIN
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -64,11 +66,26 @@ export default {
 
 <style scoped lang="scss">
   .v-header {
+    position: relative;
+    height: unset !important;
+  }
+  .v-header_body {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* ширина - paddingX */
+    width: calc(100% - 60px);
     display: flex;
     flex-flow: row;
     align-items: center;
     justify-content: space-between;
     padding: 5px 30px 0;
+    @media (max-width: 600px) {
+      /* ширина - paddingX */
+      width: calc(100% - 20px);
+      padding: 5px 10px 0;
+    }
   }
   .left {
     font-family: 'Kurale';
