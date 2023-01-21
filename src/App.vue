@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <v-header />
     <hamster-modal />
     <router-view />
     <v-footer />
@@ -7,11 +8,12 @@
 </template>
 
 <script>
+import vHeader from './components/main/v-header'
 import vFooter from './components/main/v-footer'
 import hamsterModal from '@/components/UI/hamster-modal'
 
 export default {
-  components: {vFooter, hamsterModal},
+  components: {vHeader, vFooter, hamsterModal},
   mounted() {
     window.scroll(0, 0)
   }
