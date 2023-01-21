@@ -26,6 +26,7 @@ export default {
 
 <style scoped lang="scss">
 .v-button {
+  cursor: pointer;
   padding: 4px 30px;
   font-family: 'Kurale';
   font-style: normal;
