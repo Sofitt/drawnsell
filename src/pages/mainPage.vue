@@ -1,5 +1,5 @@
 <template>
-  <div class="main-page container">
+  <div class="main-page">
     <div class="intro">
       <img
         :src="require('@/assets/main/intro.webp')"
@@ -61,7 +61,6 @@ export default {
 .main-page {
   display: flex;
   flex-flow: column;
-  height: unset !important;
 }
 .intro {
   position: relative;
@@ -73,7 +72,7 @@ export default {
   margin-bottom: 234px;
   overflow: hidden;
   @media (max-width: 1200px) {
-    min-height: 900px;
+    min-height: 100vh;
   }
   & h1 {
     position: absolute;
@@ -90,7 +89,7 @@ export default {
     position: absolute;
     width: 100%;
     object-fit: contain;
-    @media (max-width: 900px) {
+    @media (max-width: 1150px) {
       object-fit: cover;
       width: unset;
     }

@@ -60,6 +60,9 @@ export default {
     this.createOffsetScreenCanvas()
     this.rerenderImg()
   },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.rerenderImg)
+  },
   methods: {
     createOffsetScreenCanvas () {
       this.offScreenCanvas = document.createElement('canvas')
@@ -103,7 +106,7 @@ export default {
     setCanvasSize () {
       const { clientWidth: width, clientHeight: height } = document.querySelector('#draw-field').parentNode
       this.context.canvas.width = width - 5
-      this.context.canvas.height = this.fullscreen ? height - 15 : height / 2
+      this.context.canvas.height = this.fullscreen ? height - 15 : height > 800 ? 800 : height
     },
     putImgData () {
       this.context.drawImage(this.offScreenCanvas, 0, 0)

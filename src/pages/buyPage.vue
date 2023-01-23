@@ -1,15 +1,20 @@
 <template>
   <div class="buy-page">
-    <container />
+    <div class="container-wrapper">
+      <intro />
+      <container />
+    </div>
   </div>
 </template>
 
 <script>
+import intro from '@/components/buy/intro'
 import container from '@/components/buy/container'
 
 export default {
   name: 'buy-page',
   components: {
+    intro,
     container
   },
   data () {
@@ -26,6 +31,7 @@ export default {
 
 <style scoped lang="scss">
 .buy-page {
+  padding-top: 40px;
   padding-bottom: 500px;
 }
 </style>

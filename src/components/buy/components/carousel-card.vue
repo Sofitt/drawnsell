@@ -1,6 +1,6 @@
 <template>
   <article
-    class="buy-card"
+    class="carousel-card"
   >
     <img
       :src="require(`@/assets/buy-carousel/${cardData.img}`)"
@@ -16,7 +16,7 @@
 <script>
 
 export default {
-  name: 'buy-card',
+  name: 'carousel-card',
   props: {
     cardData: {
       type: Object,
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.buy-card {
+.carousel-card {
   cursor: pointer;
   position: relative;
   display: flex;

@@ -150,7 +150,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #313131;
+  background-color: #848484;
   & > img {
     filter: contrast(200%) drop-shadow(16px 16px 20px blue)
   }

@@ -35,7 +35,6 @@ export default {
     }
     const cancelScroll = () => {
       document.body.style.overflow = 'hidden'
-      document.body.style.transform = 'translateX(-8px)'
     }
     const scrollToFooter = () => {
       window.scrollTo({behavior: 'smooth', top: document.documentElement.scrollHeight - document.documentElement.clientHeight, left: 0})

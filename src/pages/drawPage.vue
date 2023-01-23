@@ -1,16 +1,24 @@
 <template>
   <div class="draw-page">
-    <container />
+    <div class="container-wrapper">
+      <intro />
+      <container />
+      <statistics />
+    </div>
   </div>
 </template>
 
 <script>
+import intro from '@/components/draw/intro'
 import container from '@/components/draw/container'
+import statistics from '@/components/draw/statistics'
 
 export default {
   name: 'draw-page',
   components: {
-    container
+    intro,
+    container,
+    statistics
   },
   data () {
     return {}
@@ -26,6 +34,7 @@ export default {
 
 <style scoped lang="scss">
   .draw-page {
+    padding-top: 40px;
     height: 100%;
   }
 </style>
