@@ -107,7 +107,7 @@ export default {
     },
     renderImage (e, data) {
       let img = document.createElement('img')
-      img.src = require(`@/assets/buy-carousel/${data.img}`)
+      // img.src = data.img
       img.style.top = e.layerY + 'px'
       img.style.left = e.layerX + 'px'
       img.style.border = '1px solid transparent'

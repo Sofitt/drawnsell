@@ -3,7 +3,7 @@
     class="carousel-card"
   >
     <img
-      :src="require(`@/assets/buy-carousel/${cardData.img}`)"
+      :src="`http://localhost:8000/`+cardData.img"
       alt=""
     >
     <div class="info">

@@ -15,16 +15,23 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import carousel from '@/components/buy/components/carousel'
 import basket from '@/components/buy/components/basket'
 
 export default {
   name: 'container',
+  props: {
+    cards: {
+      type: Array,
+      required: true
+    }
+  },
   components: {
     carousel,
     basket
   },
-  setup () {
+  setup (props) {
     const cfg = {
       position: 'absolute',
       top: '-100%',
@@ -56,7 +63,7 @@ export default {
         return
       }
       if (!ghost) {
-        img.src = require(`@/assets/buy-carousel/${cardData.img}`)
+        img.src = cardData.img
         img.id = 'ghost'
         Object.assign(img.style, cfg)
         document.body.appendChild(img)
@@ -71,32 +78,19 @@ export default {
       setDataTransfer()
       setGhostImg()
     }
+    const carouselContent = computed(() => {
+      console.debug('p', props.cards)
+      const content = []
+      const length = props.cards.length
+      content.push(props.cards.slice(0, length/2))
+      content.push(props.cards.slice(length/2))
+
+      return content
+    })
 
     return {
       dragItem,
-      carouselContent: [
-        [
-          {img: 'bg1.png', name: 'Colbasa', cost: 15, isLast: true},
-          {img: 'bg1.png', name: 'Colbasa', cost: 5, count: 1},
-          {img: 'bg1.png', name: 'Colbasa', cost: 35, count: 1},
-          {img: 'bg1.png', name: 'Colbasa', cost: 5, count: 1},
-          {img: 'bg1.png', name: 'Colbasa', cost: 35, count: 1},
-          {img: 'bg1.png', name: 'Colbasa', cost: 5, count: 1},
-          {img: 'bg1.png', name: 'Colbasa', cost: 35, count: 1},
-          {img: 'bg1.png', name: 'Colbasa', cost: 25, count: 1}
-        ],
-        [
-          {img: 'bg2.png', name: 'Servilatt', cost: 55, count: 1},
-          {img: 'bg2.png', name: 'Servilatt', cost: 65, count: 1},
-          {img: 'bg2.png', name: 'Servilatt', cost: 85, count: 1},
-          {img: 'bg2.png', name: 'Servilatt', cost: 55, count: 1},
-          {img: 'bg2.png', name: 'Servilatt', cost: 65, count: 1},
-          {img: 'bg2.png', name: 'Servilatt', cost: 85, count: 1},
-          {img: 'bg2.png', name: 'Servilatt', cost: 55, count: 1},
-          {img: 'bg2.png', name: 'Servilatt', cost: 65, count: 1},
-          {img: 'bg2.png', name: 'Servilatt', cost: 85, count: 1}
-        ]
-      ]
+      carouselContent
     }
   }
 }

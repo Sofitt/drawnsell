@@ -17,7 +17,7 @@
         :key="card.img"
       >
         <buyCard
-          :class="{__disabled: card.isLast}"
+          :class="{__disabled: card.count === 0}"
           draggable="true"
           :card-data="card"
           @dragstart="dragStart($event, card)"
@@ -71,8 +71,6 @@ export default {
       swiper: null
     }
   },
-  computed: {},
-  watch: {},
   mounted () {
     this.swiper = this.$el.querySelector('.swiper').swiper
   },
