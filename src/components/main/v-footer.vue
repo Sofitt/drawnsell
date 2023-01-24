@@ -1,8 +1,6 @@
 <template>
   <div class="v-footer">
     <div
-      :src="require('@/assets/main/sun.png')"
-      alt=""
       class="sun"
     />
     <img

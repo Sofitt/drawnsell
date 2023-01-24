@@ -21,7 +21,7 @@
             <router-link
               v-for="page of pages"
               :key="page.name"
-              :to="`/` + page.name"
+              :to="{name: page.name}"
             >
               <img
                 :src="page.icon"
@@ -191,6 +191,9 @@ export default {
       align-items: center;
       justify-content: center;
       background-color: white;
+      &.router-link-active {
+        background-color: var(--green-1);
+      }
       &:hover {
         background-color: #c6c6c6;
       }
