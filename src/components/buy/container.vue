@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import carousel from '@/components/buy/carousel'
-import basket from '@/components/buy/basket'
+import carousel from '@/components/buy/components/carousel'
+import basket from '@/components/buy/components/basket'
 
 export default {
   name: 'container',
@@ -112,7 +112,7 @@ export default {
     padding: 25px 0;
   }
   .basket {
-    width: 500px;
-    aspect-ratio: 3/2;
+    width: 650px;
+    aspect-ratio: 1;
   }
 </style>

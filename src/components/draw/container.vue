@@ -18,7 +18,7 @@
 <script>
 import { ref, provide } from 'vue'
 import tools from '@/components/draw/components/tools'
-import field from '@/components/draw/field'
+import field from '@/components/draw/components/field'
 
 export default {
   name: 'container',
@@ -75,7 +75,7 @@ export default {
 <style scoped lang="scss">
 .container {
   position: relative;
-  height: 100vh;
+  height: 800px;
   & .tools {
     position: absolute;
     top: 30px;

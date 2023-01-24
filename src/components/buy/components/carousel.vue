@@ -44,7 +44,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Scrollbar } from 'swiper'
-import buyCard from '@/components/buy/components/buy-card'
+import buyCard from '@/components/buy/components/carousel-card'
 import 'swiper/css'
 
 export default {

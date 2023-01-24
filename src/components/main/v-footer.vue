@@ -1,6 +1,10 @@
 <template>
   <div class="v-footer">
+    <div
+      class="sun"
+    />
     <img
+      class="back"
       :src="require('@/assets/main/wave_btp.png')"
       alt=""
     >
@@ -91,13 +95,34 @@ export default {
   align-items: center;
   overflow: hidden;
   height: 1388px;
-  & img {
+  & .back {
     z-index: -1;
     pointer-events: none;
     position: absolute;
     object-fit: cover;
     width: 2304px;
     height: auto;
+  }
+  & .sun {
+    z-index: -2;
+    position: absolute;
+    width: 488px;
+    height: 488px;
+    top: 100px;
+    left: 53%;
+    transform: translateX(-50%);
+    background: rgba(255, 78, 169, 0.25);
+    box-shadow: 0px -2px 100px 20px rgba(238, 40, 101, 0.25);
+    border-radius: 100% 100%;
+    @media (max-width: 640px) {
+      width: 300px;
+      height: 300px;
+    }
+  }
+  & .hamster {
+    @media (max-width: 640px) {
+      transform: translateY(-80px);
+    }
   }
 }
 .title {
