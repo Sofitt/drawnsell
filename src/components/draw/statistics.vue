@@ -42,6 +42,7 @@ export default {
 .card {
   min-width: 340px;
   flex-basis: calc(100% / 3 - 27px);
+  flex-grow: 1;
   height: 545px;
   background-color: var(--green-1);
   @media (max-width: 800px) {

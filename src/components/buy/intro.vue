@@ -2,7 +2,7 @@
   <div class="intro container">
     <h2>BUY</h2>
     <img
-      :src="require('@/assets/buy/intro.jpg')"
+      :src="require('@/assets/buy/intro.webp')"
       alt=""
     >
   </div>

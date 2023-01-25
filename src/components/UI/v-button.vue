@@ -1,5 +1,6 @@
 <template>
   <button
+    :style="{color}"
     class="v-button"
     :class="{transparent, rounded}"
     @click="$emit('click', $event)"
@@ -14,6 +15,9 @@ export default {
   name: 'v-button',
   emits: ['click'],
   props: {
+    color: {
+      type: String
+    },
     transparent: {
       type: Boolean
     },
@@ -24,7 +28,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .v-button {
   cursor: pointer;
   padding: 4px 30px;

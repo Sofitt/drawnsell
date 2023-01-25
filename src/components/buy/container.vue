@@ -79,7 +79,6 @@ export default {
       setGhostImg()
     }
     const carouselContent = computed(() => {
-      console.debug('p', props.cards)
       const content = []
       const length = props.cards.length
       content.push(props.cards.slice(0, length/2))

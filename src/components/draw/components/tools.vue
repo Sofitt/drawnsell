@@ -25,9 +25,9 @@ export default {
     'change-pen-size',
     'change-pen-mode',
     'download-img',
+    'reg-card',
     'fullscreen'
   ],
-  components: {},
   data () {
     return {
       tools: [],
@@ -49,6 +49,9 @@ export default {
         : action.fill[indexOfCurrentStaff + 1]
 
       return action[currentStaff]
+    },
+    regCard () {
+      this.$emit('reg-card')
     },
     downloadImg () {
       this.$emit('download-img')
@@ -102,6 +105,7 @@ export default {
    max-width: 30%;
    gap: 10px;
    & li {
+     cursor: pointer;
      pointer-events: auto;
      position: relative;
      display: flex;
