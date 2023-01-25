@@ -42,5 +42,6 @@ npm run build
 ```
 ## Backend
 ```
+cd .\server\
 npm run start
 ```
