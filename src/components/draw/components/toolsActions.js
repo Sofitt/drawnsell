@@ -1,5 +1,10 @@
 export const menu = [
   {
+    icon: 'reg.svg',
+    name: 'Регистрация карточки',
+    funcName: 'regCard'
+  },
+  {
     icon: 'download.svg',
     name: 'Скачать изображение',
     funcName: 'downloadImg'
@@ -13,7 +18,7 @@ export const menu = [
     icon: 'color.svg',
     name: 'Сменить цвет',
     funcName: 'changeColor',
-    currentColor: { color: 'blue', name: 'Синий' },
+    currentColor: { color: 'red', name: 'Красный' },
     fill: [
       { color: 'green', name: 'Зеленый' },
       { color: 'red', name: 'Красный' },

@@ -16,10 +16,13 @@
       class="info"
       :class="{__hover: showInfo}"
     >
+      <v-button>
+        Оформить покупки
+      </v-button>
       <li
         v-for="item of shopItems"
-        :key="item.img"
-        :data-src="item.name"
+        :key="item.id"
+        :data-src="item.id"
         @mouseenter="highlightItem(item)"
         @mouseleave="highlightItem(item, false)"
       >
@@ -48,11 +51,11 @@
 </template>
 
 <script>
+import VButton from '@/components/UI/v-button'
 
 export default {
   name: 'basket',
-  emits: ['drop'],
-  components: {},
+  components: {VButton},
   data () {
     return {
       shopItems: [],
@@ -75,22 +78,22 @@ export default {
     subtractItem (item) {
       if (item.count - 1 >= 1) {
         item.count--
-        if (document.querySelectorAll(`[data-name='${item.name}']`).length > 1) {
-          let removeItem = document.querySelector(`[data-name='${item.name}']`)
+        if (document.querySelectorAll(`[data-name='${item.id}']`).length > 1) {
+          let removeItem = document.querySelector(`[data-name='${item.id}']`)
           removeItem.remove()
         }
       }
     },
     removeItem (item) {
-      const index = this.shopItems.findIndex(product => product.name === item.name)
+      const index = this.shopItems.findIndex(product => product.id === item.id)
       this.shopItems.splice(index, 1)
-      let removeList = document.querySelectorAll(`[data-name='${item.name}']`)
+      let removeList = document.querySelectorAll(`[data-name='${item.id}']`)
       for (let item of removeList) {
         item.remove()
       }
     },
     highlightItem (item, highlight = true) {
-      let imgNodeList = document.querySelectorAll(`[data-name='${item.name}']`)
+      let imgNodeList = document.querySelectorAll(`[data-name='${item.id}']`)
       if (highlight) {
         for (let node of imgNodeList) {
           node.style.filter = 'hue-rotate(-360deg)saturate(200%)'
@@ -107,16 +110,16 @@ export default {
     },
     renderImage (e, data) {
       let img = document.createElement('img')
-      img.src = require(`@/assets/buy-carousel/${data.img}`)
+      img.src = `http://localhost:8000/`+data.img
       img.style.top = e.layerY + 'px'
       img.style.left = e.layerX + 'px'
       img.style.border = '1px solid transparent'
-      img.setAttribute('data-name', data.name)
+      img.setAttribute('data-name', data.id)
       Object.assign(img.style, this.cfg)
       this.$refs.zone.appendChild(img)
     },
     addProductCard (data) {
-      const index = this.shopItems.findIndex(product => product.name === data.name)
+      const index = this.shopItems.findIndex(product => product.id === data.id)
       if (index >= 0) {
         this.shopItems[index].count++
       } else {
@@ -173,6 +176,11 @@ export default {
   &.__hover {
     transform: translateY(0%);
     transition: transform .1s ease-in-out;
+  }
+  & .v-button {
+    color: white;
+    padding: 5px 10px;
+    background-color: black;
   }
   & li {
     display: flex;

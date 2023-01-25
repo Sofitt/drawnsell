@@ -6,6 +6,7 @@
       @change-pen-size="changePenSize"
       @change-pen-mode="changePenMode"
       @download-img="downloadImg"
+      @reg-card="regCard"
       @fullscreen="fullscreen"
     />
     <field
@@ -61,6 +62,9 @@ export default {
     },
     downloadImg () {
       this.$options.childInterface.downloadImg()
+    },
+    regCard () {
+      this.$options.childInterface.regCard()
     },
     fullscreen () {
       this.isFullscreen ? document.exitFullscreen() : this.$el.requestFullscreen()

@@ -22,8 +22,11 @@ export default {
 <style scoped lang="scss">
 .hamster {
   position: relative;
-  height: 100%;
   user-select: none;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  padding-bottom: 100px;
 }
 .img {
   pointer-events: none;

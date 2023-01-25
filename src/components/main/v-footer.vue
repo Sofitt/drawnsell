@@ -5,7 +5,7 @@
     />
     <img
       class="back"
-      :src="require('@/assets/main/wave_btp.png')"
+      :src="require('@/assets/main/wave_btp.webp')"
       alt=""
     >
     <audio
@@ -68,19 +68,17 @@ export default {
       observer.observe(button)
     },
     playAudio () {
-      let returnValue
       this.audio.volume = this.lastVolume
       this.audio.play()
-      document.addEventListener('scroll', () => {
-        const maxVolume = 0.20
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-        const scrolled = (winScroll / height) * 100
-        const volumeFromPercent = Math.round(scrolled) * maxVolume / 100
-        this.lastVolume = volumeFromPercent
-      }, false)
-
-      return returnValue
+      document.addEventListener('scroll', this.controlVolume, false)
+    },
+    controlVolume () {
+      const maxVolume = 0.20
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+      const scrolled = (winScroll / height) * 100
+      const volumeFromPercent = Math.round(scrolled) * maxVolume / 100
+      this.lastVolume = volumeFromPercent
     }
   }
 }
@@ -88,13 +86,15 @@ export default {
 
 <style scoped lang="scss">
 .v-footer {
+  padding-top: 98px;
   z-index: 1;
   position: relative;
   display: flex;
   flex-flow: column;
   align-items: center;
+  justify-content: flex-end;
   overflow: hidden;
-  height: 1388px;
+  min-height: 1388px;
   & .back {
     z-index: -1;
     pointer-events: none;
@@ -108,7 +108,7 @@ export default {
     position: absolute;
     width: 488px;
     height: 488px;
-    top: 100px;
+    top: 134px;
     left: 53%;
     transform: translateX(-50%);
     background: rgba(255, 78, 169, 0.25);

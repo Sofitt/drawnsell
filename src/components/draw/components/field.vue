@@ -88,7 +88,7 @@ export default {
         this.setPosition(evt)
       } else if (this.line.mode === 'rays') {
         this.subContext.moveTo(this.pos.x, this.pos.y)
-        this.subContext.lineTo(evt.offsetX, evt.clientY)
+        this.subContext.lineTo(evt.offsetX, evt.offsetY)
       } else { // if (this.line.mode === 'pen')
         this.subContext.moveTo(this.pos.x, this.pos.y)
         this.setPosition(evt)
@@ -122,6 +122,9 @@ export default {
       document.body.appendChild(a)
       a.click()
     },
+    regCard () {
+      // todo окно регистрации карточки
+    },
     emitInterface () {
       this.$emit('interface', {
         downloadImg: () => this.downloadImg()
@@ -134,5 +137,6 @@ export default {
 <style scoped lang="scss">
 canvas {
   border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 </style>
