@@ -18,7 +18,7 @@
 ![image](https://user-images.githubusercontent.com/81359836/214636154-26d3cab1-47ac-47aa-be21-04f59c3924ef.png)
 
 ## Интерактивная корзина товаров на drag & drop
-![image](https://user-images.githubusercontent.com/81359836/214636416-58badc02-c4f1-47fa-9b93-b62391d76d40.png)
+![image](https://user-images.githubusercontent.com/81359836/214642668-c31586b4-aeec-406c-8548-ab3e51272efd.png)
 
 ## Танцующий хомяк в футере
 ![dancing-hamstergif](https://user-images.githubusercontent.com/81359836/214636669-098b1b52-6fa0-4e16-a216-8feaecbd3937.gif)
