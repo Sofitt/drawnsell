@@ -1,5 +1,5 @@
 # DrawNSell
-![hub](https://user-images.githubusercontent.com/81359836/214629745-68ed02fa-5d31-4fe2-93e3-8bef9fd66148.jpg)
+![hub](https://user-images.githubusercontent.com/81359836/214645489-95007433-98a9-4100-af11-a9a062424540.jpg)
 
 ## Стек
 - Vue 3
