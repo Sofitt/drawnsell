@@ -135,11 +135,6 @@ export default {
     align-items: center;
     & p {
       z-index: 1;
-      font-family: 'Kurale';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 24px;
-      line-height: 35px;
       text-align: center;
       color: white;
       &:last-of-type {

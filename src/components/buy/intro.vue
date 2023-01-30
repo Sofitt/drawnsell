@@ -1,6 +1,6 @@
 <template>
   <div class="intro container">
-    <h2>BUY</h2>
+    <h1>BUY</h1>
     <img
       :src="require('@/assets/buy/intro.webp')"
       alt=""
@@ -32,13 +32,8 @@ export default {
   display: flex;
   flex-flow: column;
   align-items: center;
-  & h2 {
+  & h1 {
     margin-bottom: 160px;
-    font-family: 'Lexend Exa';
-    font-style: normal;
-    font-weight: 900;
-    font-size: 74px;
-    line-height: 92px;
     color: #FFFFFF;
   }
   & img {

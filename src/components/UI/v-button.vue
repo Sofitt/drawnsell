@@ -32,11 +32,7 @@ export default {
 .v-button {
   cursor: pointer;
   padding: 4px 30px;
-  font-family: 'Kurale';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 35px;
+  font-family: 'Kurale Regular';
   color: black;
   &.transparent {
     color: white;
