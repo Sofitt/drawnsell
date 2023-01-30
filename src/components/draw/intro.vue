@@ -1,6 +1,6 @@
 <template>
   <div class="intro container">
-    <h2>DRAW</h2>
+    <h1>DRAW</h1>
   </div>
 </template>
 
@@ -28,12 +28,7 @@ export default {
   display: flex;
   flex-flow: column;
   align-items: center;
-  & h2 {
-    font-family: 'Lexend Exa';
-    font-style: normal;
-    font-weight: 900;
-    font-size: 74px;
-    line-height: 92px;
+  & h1 {
     color: #FFFFFF;
   }
 }

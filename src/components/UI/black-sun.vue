@@ -13,6 +13,7 @@ export default {
 
 <style scoped lang="scss">
 .black-sun {
+  pointer-events: none;
   z-index: 0;
   position: absolute;
   top: -76px;

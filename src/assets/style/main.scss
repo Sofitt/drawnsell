@@ -1,6 +1,8 @@
-@import './reset.scss';
-@import "color-shorts";
+@import 'reset.scss';
+@import "color-shorts.scss";
 @import "vars.scss";
+@import "fonts.scss";
+@import "typography.scss";
 html {
   background-color: #180617;
 }

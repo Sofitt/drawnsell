@@ -159,11 +159,8 @@ export default {
     }
   }
   .left {
-    font-family: 'Kurale';
-    font-style: normal;
-    font-weight: 400;
+    font-family: 'Kurale Regular';
     font-size: 24px;
-    line-height: 35px;
     color: #FFFFFF;
     & a {
       cursor: pointer;
@@ -205,11 +202,9 @@ export default {
     }
   }
   .login {
-    font-family: 'Kurale';
-    font-style: normal;
-    font-weight: 400;
+    cursor: pointer;
+    font-family: 'Kurale Regular';
     font-size: 18px;
-    line-height: 27px;
     color: black;
     background-color: var(--yellow-2);
     padding: 3px 31px;

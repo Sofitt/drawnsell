@@ -63,7 +63,7 @@ export default {
         return
       }
       if (!ghost) {
-        img.src = cardData.img
+        img.src = `http://localhost:8000/${cardData.img}`
         img.id = 'ghost'
         Object.assign(img.style, cfg)
         document.body.appendChild(img)

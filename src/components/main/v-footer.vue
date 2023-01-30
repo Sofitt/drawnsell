@@ -22,7 +22,7 @@
       id="music-starter"
     />
     <hamster />
-    <h4 class="title">
+    <h4 class="project-title">
       Draw n Sell
     </h4>
   </div>
@@ -119,22 +119,21 @@ export default {
       height: 300px;
     }
   }
+  & #music-starter {
+    position: absolute;
+    top: 0;
+  }
   & .hamster {
     @media (max-width: 640px) {
       transform: translateY(-80px);
     }
   }
 }
-.title {
+.project-title {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   bottom: 24px;
-  font-family: 'Lexend Exa', serif;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 64px;
-  line-height: 80px;
   text-align: center;
   color: #FFFFFF;
   mix-blend-mode: difference;

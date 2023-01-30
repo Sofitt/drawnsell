@@ -1,1 +1,14 @@
-// todo Шрифты
+@font-face {
+  font-family: 'Kurale Regular';
+  src: local('Kurale Regular'),
+  url("~@/assets/fonts/Kurale-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lexend Exa';
+  src: local('Lexend Exa'),
+  url("~@/assets/fonts/LexendExa-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}

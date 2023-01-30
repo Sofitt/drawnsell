@@ -36,5 +36,6 @@ export default {
   .draw-page {
     padding-top: 40px;
     height: 100%;
+    margin-bottom: 118px;
   }
 </style>
