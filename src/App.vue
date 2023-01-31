@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <black-sun />
     <v-header />
     <router-view />
     <v-footer />
@@ -9,13 +8,12 @@
 </template>
 
 <script>
-import blackSun from '@/components/UI/black-sun'
 import vHeader from './components/main/v-header'
 import vFooter from './components/main/v-footer'
 import hamsterModal from '@/components/modals/hamster-modal'
 
 export default {
-  components: {blackSun, vHeader, vFooter, hamsterModal},
+  components: {vHeader, vFooter, hamsterModal},
   mounted() {
     window.scroll(0, 0)
   }

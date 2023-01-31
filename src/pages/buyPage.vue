@@ -1,5 +1,6 @@
 <template>
   <div class="buy-page">
+    <black-sun />
     <div class="container-wrapper">
       <intro />
       <container
