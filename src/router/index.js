@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import mainPage from '@/pages/mainPage.vue'
+import errorPage from '@/pages/errorPage'
 
 const routes = [
   {
@@ -16,7 +17,14 @@ const routes = [
     path: '/',
     name: 'main',
     component: mainPage
-  }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: () => {
+      return { name: 'error-page' }
+    }
+  },
+  { path: '/404', name: 'error-page', component: errorPage }
 ]
 
 const router = createRouter({

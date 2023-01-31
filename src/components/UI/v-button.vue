@@ -1,7 +1,7 @@
 <template>
   <button
     :style="{color}"
-    class="v-button"
+    class="v-button t-text"
     :class="{transparent, rounded}"
     @click="$emit('click', $event)"
   >

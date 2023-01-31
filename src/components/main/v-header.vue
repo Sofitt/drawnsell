@@ -8,7 +8,7 @@
       <div class="v-header_body">
         <nav class="left">
           <component
-            :is="isMainPage.value ? 'span' : 'a'"
+            :is="isMainPage ? 'span' : 'a'"
             class="user"
             @click="routeTo"
           >
@@ -165,6 +165,9 @@ export default {
     & a {
       cursor: pointer;
       text-decoration: none;
+    }
+    & span {
+      cursor: default;
     }
   }
   .right {
